@@ -1,0 +1,209 @@
+ /* Google Fonts */
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+ /* CSS styles for the page */
+ body {
+   font-family: 'Poppins', sans-serif;
+   margin: 0;
+   padding: 0;
+   background-color: #f5f5f5;
+ }
+
+ .header {
+   background-image: linear-gradient(to right, #7b4397, #dc2430);
+   padding: 20px 40px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ }
+
+ .header nav {
+   display: flex;
+   justify-content: center;
+ }
+
+ .header nav a {
+   color: white;
+   text-decoration: none;
+   margin: 0 20px;
+   font-size: 15px;
+   font-weight: 600;
+   position: relative;
+   padding-bottom: 5px;
+ }
+
+ .header nav a:after {
+   content: "";
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   width: 0;
+   height: 2px;
+   background-color: white;
+   transition: width 0.3s ease;
+ }
+
+ .header nav a:hover:after {
+   width: 100%;
+ }
+
+ .container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 60px 40px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+
+ .product-gallery {
+   flex: 0 0 50%;
+   overflow-x: auto;
+   scroll-snap-type: x mandatory;
+   -webkit-overflow-scrolling: touch;
+   margin-right: 40px;
+   display: flex;
+   position: relative;
+ }
+
+ .product-image {
+   flex: 0 0 80%;
+   scroll-snap-align: center;
+   position: relative;
+   overflow: hidden;
+   border-radius: 20px;
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+   margin-right: 20px;
+ }
+
+ .product-image img {
+   max-width: 100%;
+   height: auto;
+   transform: scale(1.1);
+   transition: transform 0.5s ease;
+ }
+
+ .product-image:hover img {
+   transform: scale(1);
+ }
+
+ .product-details {
+   flex: 0 0 50%;
+ }
+
+ .product-details h1 {
+   font-size: 35px;
+   font-weight: 700;
+   margin-bottom: 20px;
+   margin-top: 0px;
+   background-image: linear-gradient(to right, #7b4397, #dc2430);
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent;
+ }
+
+ .product-details p {
+   font-size: 15px;
+   line-height: 1.6;
+   margin-bottom: 30px;
+   color: #555;
+ }
+
+ .product-details .price {
+   font-size: 32px;
+   font-weight: 700;
+   margin-bottom: 30px;
+   color: #7b4397;
+ }
+
+ .product-details button {
+   background-image: linear-gradient(to right, #7b4397, #dc2430);
+   color: white;
+   padding: 16px 32px;
+   border: none;
+   border-radius: 50px;
+   cursor: pointer;
+   font-size: 18px;
+   font-weight: 600;
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+   transition: transform 0.3s ease;
+ }
+
+ .product-details button:hover {
+   transform: translateY(-3px);
+ }
+
+ .product-details .features {
+   margin-top: 40px;
+ }
+
+ .product-details .features h2 {
+   font-size: 28px;
+   font-weight: 700;
+   margin-bottom: 20px;
+   background-image: linear-gradient(to right, #7b4397, #dc2430);
+   background-clip: text;
+   -webkit-background-clip: text;
+   color: transparent;
+ }
+
+ .product-details .features ul {
+   list-style-type: none;
+   padding: 0;
+ }
+
+ .product-details .featuresli {
+   font-size: 18px;
+   margin-bottom: 10px;
+   color: #555;
+ }
+
+ .nav-btn {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   background-color: #7b4397;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 50%;
+   cursor: pointer;
+   font-size: 18px;
+   font-weight: 600;
+   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+   transition: transform 0.3s ease;
+   opacity: 0;
+   pointer-events: none;
+ }
+
+ .product-gallery:hover .nav-btn {
+   opacity: 1;
+   pointer-events: auto;
+ }
+
+ .nav-btn:hover {
+   transform: translateY(-3px);
+ }
+
+ .nav-btn.prev {
+   left: 0;
+ }
+
+ .nav-btn.next {
+   right: 0;
+ }
+
+ .nav-btn:before {
+   content: "";
+   display: block;
+   width: 10px;
+   height: 10px;
+   border-top: 2px solid white;
+   border-right: 2px solid white;
+   transform: rotate(-45deg);
+   margin-right: 5px;
+ }
+
+ .nav-btn.prev:before {
+   transform: rotate(135deg);
+   margin-right: 0;
+   margin-left: 5px;
+ }

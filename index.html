@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Product Details</title>
+  
+</head>
+<body>
+  <header class="header">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Products</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="product-gallery">
+      <button class="nav-btn prev">&lt;</button>
+      <div class="product-image">
+        <img src="mic1.jpg" alt="Premium Product 1">
+      </div>
+      <div class="product-image">
+        <img src="mic2.jpg" alt="Premium Product 2">
+      </div>
+      <div class="product-image">
+        <img src="mic3.jpg" alt="Premium Product 3">
+      </div>
+      <div class="product-image">
+        <img src="mic4.jpg" alt="Premium Product 4">
+      </div>
+     
+      <button class="nav-btn next">&gt;</button>
+    </div>
+
+    <div class="product-details">
+      <h1>Premium Product Name</h1>
+      <p>This is a premium product with advanced features and a sleek design. It is perfect for those who demand the best in quality and performance.</p>
+      <div class="price">$99.99</div>
+      <button>Add to Cart</button>
+      <div class="features">
+        <h2>Key Features:</h2>
+        <ul>
+          <li>High-quality materials</li>
+          <li>Cutting-edge technology</li>
+          <li>Intuitive user experience</li>
+          <li>Durable and long-lasting</li>
+          <li>Backed by a comprehensive warranty</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const gallery = document.querySelector('.product-gallery');
+    const images = gallery.querySelectorAll('.product-image');
+    const prevBtn = gallery.querySelector('.nav-btn.prev');
+    const nextBtn = gallery.querySelector('.nav-btn.next');
+    let currentIndex = 0;
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+      }
+      gallery.scrollLeft = images[currentIndex].offsetLeft;
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex++;
+      if (currentIndex >= images.length) {
+        currentIndex = 0;
+      }
+      gallery.scrollLeft = images[currentIndex].offsetLeft;
+    });
+  </script>
+</body>
+</html>
