@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Premium Product Details</title>
-  
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
   <header class="header">
@@ -17,7 +16,6 @@
     </nav>
   </header>
 
-  
   <div class="container">
     <div class="product-gallery">
       <button class="nav-btn prev">&lt;</button>
@@ -41,7 +39,7 @@
       <h1>Premium Product Name</h1>
       <p>This is a premium product with advanced features and a sleek design. It is perfect for those who demand the best in quality and performance.</p>
       <div class="price">$99.99</div>
-      <button>Add to Cart</button>
+      <button id="add-to-cart">Add to Cart</button>
       <div class="features">
         <h2>Key Features:</h2>
         <ul>
@@ -53,30 +51,66 @@
         </ul>
       </div>
     </div>
+
+    <!-- Add to Cart modal -->
+    <!-- ... (rest of the HTML code remains the same) ... -->
+
+<!-- Add to Cart modal -->
+<div class="modal" id="cart-modal">
+  <div class="modal-content">
+    <h2>Buy Now</h2>
+    <form id="buy-now-form">
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" value="1" min="1">
+      <br><br>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+      <br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      <br><br>
+      <button type="submit">Buy Now</button>
+    </form>
   </div>
+</div>
 
-  <script>
-    const gallery = document.querySelector('.product-gallery');
-    const images = gallery.querySelectorAll('.product-image');
-    const prevBtn = gallery.querySelector('.nav-btn.prev');
-    const nextBtn = gallery.querySelector('.nav-btn.next');
-    let currentIndex = 0;
+<script>
+  // Get the modal and add to cart button elements
+  const modal = document.getElementById('cart-modal');
+  const addToCartBtn = document.getElementById('add-to-cart');
+  const buyNowForm = document.getElementById('buy-now-form');
 
-    prevBtn.addEventListener('click', () => {
-      currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = images.length - 1;
-      }
-      gallery.scrollLeft = images[currentIndex].offsetLeft;
+  // Add event listener to the add to cart button
+  addToCartBtn.addEventListener('click', () => {
+    // Toggle the modal visibility
+    modal.style.display = 'block';
+  });
+
+  // Add event listener to the buy now form
+  buyNowForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(buyNowForm);
+    fetch('create-order.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      // Handle success response
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle error response
     });
+  });
 
-    nextBtn.addEventListener('click', () => {
-      currentIndex++;
-      if (currentIndex >= images.length) {
-        currentIndex = 0;
-      }
-      gallery.scrollLeft = images[currentIndex].offsetLeft;
-    });
-  </script>
+  // Add event listener to the modal to close it when clicked outside
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
 </body>
 </html>
