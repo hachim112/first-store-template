@@ -1,35 +1,34 @@
 <?php
-// Check if the request is coming from the same origin
-if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != 'https://your-website.com/your-page') {
-  die('Unauthorized access');
-}
-
-// Get the form data
+// Retrieve the form data
 $quantity = $_POST['quantity'];
 $name = $_POST['name'];
 $email = $_POST['email'];
 
-// Create a new order in WooCommerce
-$order = wc_create_order(array(
-  'customer_id' => 0, // Guest customer
-  'status' => 'pending',
-  'currency' => get_woocommerce_currency(),
-  'billing_first_name' => $name,
-  'billing_email' => $email
-));
+// Insert the data into the database table
+// Replace the database connection details and table name with your own
+$servername = "localhost";
+$username = "your_username";
+$password = "your_password";
+$dbname = "your_database_name";
 
-// Add the product to the order
-$product_id = 123; // Replace with the ID of the product you want to add
-$product = wc_get_product($product_id);
-wc_add_order_item($order->get_id(), array(
-  'product_id' => $product_id,
-  'quantity' => $quantity
-));
+// Create a new PDO instance
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-// Update the order totals
-wc_update_order_item_totals($order->get_id());
+// Prepare the SQL statement
+$stmt = $conn->prepare("INSERT INTO table_of_commands (quantity, name, email) VALUES (:quantity, :name, :email)");
 
-// Send a success response
-echo json_encode(array('message' => 'Order created successfully'));
+// Bind the parameters
+$stmt->bindParam(':quantity', $quantity);
+$stmt->bindParam(':name', $name);
+$stmt->bindParam(':email', $email);
 
+// Execute the statement
+$stmt->execute();
+
+// Close the database connection
+$conn = null;
+
+// Return a success response
+$response = array('success' => true, 'message' => 'Form submitted successfully');
+echo json_encode($response);
 ?>

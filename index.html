@@ -56,8 +56,8 @@
     <!-- ... (rest of the HTML code remains the same) ... -->
 
 <!-- Add to Cart modal -->
-<div class="modal" id="cart-modal">
-  <div class="modal-content">
+<form id="buy-now-form" action="handle-form.php" method="POST">
+    <div class="modal-content">
     <h2>Buy Now</h2>
     <form id="buy-now-form">
       <label for="quantity">Quantity:</label>
@@ -76,6 +76,8 @@
 
 <script>
   // Get the modal and add to cart button elements
+  <script>
+  // Get the modal and add to cart button elements
   const modal = document.getElementById('cart-modal');
   const addToCartBtn = document.getElementById('add-to-cart');
   const buyNowForm = document.getElementById('buy-now-form');
@@ -90,8 +92,8 @@
   buyNowForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(buyNowForm);
-    fetch('create-order.php', {
-      method: 'POST',
+    fetch(buyNowForm.action, {
+      method: buyNowForm.method,
       body: formData
     })
     .then(response => response.json())
@@ -111,6 +113,7 @@
       modal.style.display = 'none';
     }
   });
+</script>
 </script>
 </body>
 </html>
