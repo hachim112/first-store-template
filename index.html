@@ -20,19 +20,18 @@
     <div class="product-gallery">
       <button class="nav-btn prev">&lt;</button>
       <div class="product-image">
-        <img src="mic1.jpg" alt="Premium Product 1">
+        <img src="img/mic1.jpg" alt="Premium Product 1">
       </div>
       <div class="product-image">
-        <img src="mic2.jpg" alt="Premium Product 2">
+        <img src="img/mic2.jpg" alt="Premium Product 2">
       </div>
       <div class="product-image">
-        <img src="mic3.jpg" alt="Premium Product 3">
+        <img src="img/mic3.jpg" alt="Premium Product 3">
       </div>
       <div class="product-image">
-        <img src="mic4.jpg" alt="Premium Product 4">
+        <img src="img/mic4.jpg" alt="Premium Product 4">
       </div>
      
-      <button class="nav-btn next">&gt;</button>
     </div>
 
     <div class="product-details">
@@ -56,27 +55,35 @@
     <!-- ... (rest of the HTML code remains the same) ... -->
 
 <!-- Add to Cart modal -->
-<form id="buy-now-form" action="handle-form.php" method="POST">
-    <div class="modal-content">
-    <h2>Buy Now</h2>
-    <form id="buy-now-form">
-      <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" value="1" min="1">
-      <br><br>
-      <label for="name">Name:</label>
-      <input type="text" id="name" required>
-      <br><br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" required>
-      <br><br>
-      <button type="submit">Buy Now</button>
-    </form>
+<div class="modal" id="cart-modal">
+  <div class="modal-content">
+      <h2>Buy Now</h2>
+      <form id="buy-now-form" method="post" action="purchase.php">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1">
+          <br><br>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <br><br>
+          <button type="submit">Buy Now</button>
+      </form>
   </div>
 </div>
 
+<div id="success-modal" class="success-modal">
+  <div class="success-modal-content">
+      <h2>Purchase Status</h2>
+      <p id="success-message"></p>
+      <button onclick="document.getElementById('success-modal').style.display='none'">Close</button>
+  </div>
+</div>
+
+
+
 <script>
-  // Get the modal and add to cart button elements
-  <script>
   // Get the modal and add to cart button elements
   const modal = document.getElementById('cart-modal');
   const addToCartBtn = document.getElementById('add-to-cart');
@@ -92,8 +99,8 @@
   buyNowForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(buyNowForm);
-    fetch(buyNowForm.action, {
-      method: buyNowForm.method,
+    fetch('create-order.php', {
+      method: 'POST',
       body: formData
     })
     .then(response => response.json())
@@ -113,7 +120,12 @@
       modal.style.display = 'none';
     }
   });
-</script>
+   // Show the success modal if there is a success message
+   var successMessage = new URLSearchParams(window.location.search).get('success_message');
+        if (successMessage) {
+            document.getElementById("success-message").textContent = successMessage;
+            document.getElementById("success-modal").style.display = "block";
+        }
 </script>
 </body>
 </html>
